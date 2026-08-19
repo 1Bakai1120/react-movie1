@@ -1,43 +1,44 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FiSearch, FiMenu, FiX } from 'react-icons/fi';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { name: 'Upcoming', href: '#' },
+    { name: 'Upcoming', href: '/upcoming-movies' },
     { name: 'Shows', href: '#' },
     { name: 'Fanart', href: '#' },
-    { name: 'Plans', href: '#' },
+    { name: 'Plans', href: '/pricing' },
     { name: 'Community', href: '#' },
-    { name: 'Account', href: '#' },
+    { name: 'Account', href: '/account' },
   ];
 
   return (
-    <header className="fixed top-0 left-0 z-50 w-full bg-black/20  border-b border-white/10 px-4 sm:px-8 py-4 text-white">
+    <header className="fixed top-0 left-0 z-50 w-full bg-black/20 backdrop-blur-md border-b border-white/10 px-4 sm:px-8 py-4 text-white">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
 
-        {/* Логотип */}
-        <div className="flex items-center space-x-1 cursor-pointer select-none">
+        {/* Логотип со ссылкой на главную страницу */}
+        <Link to="/" className="flex items-center space-x-1 cursor-pointer select-none">
           <span className="text-2xl sm:text-3xl font-serif text-purple-600 font-bold leading-none">
             C
           </span>
           <span className="text-lg sm:text-xl font-serif tracking-tight leading-none text-gray-100">
             ine <span className="font-serif">Sphere</span>
           </span>
-        </div>
+        </Link>
 
         {/* Навигация для десктопа (md+) */}
         <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
           <nav className="flex items-center space-x-4 lg:space-x-6">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
+                to={item.href}
                 className="text-sm lg:text-base font-normal text-gray-200 hover:text-purple-400 transition-colors duration-200"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -76,14 +77,14 @@ const Header = () => {
       {isMenuOpen && (
         <nav className="md:hidden mt-4 pb-4 pt-2 border-t border-white/10 flex flex-col space-y-3 px-2">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.name}
-              href={item.href}
+              to={item.href}
               onClick={() => setIsMenuOpen(false)}
               className="text-gray-200 hover:text-purple-400 text-base font-medium transition-colors"
             >
               {item.name}
-            </a>
+            </Link>
           ))}
         </nav>
       )}
